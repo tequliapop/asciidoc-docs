@@ -1,0 +1,1116 @@
+= AsciiDoc语法快速指南
+Doc Writer <tequlia2pop@gmail.com>
+v1.0, 2016-08-23
+:toc: right
+:imagesdir: images
+:homepage: http://asciidoctor.org
+
+AsciiDoc是一种轻量级标记语言，用于创作笔记、文章、文档、书籍、网页、幻灯片和纯文本的个人页面。本指南是用于常用的AsciiDoc文档和文本格式标记的快速参考。
+
+[NOTE]
+====
+这些示例集中于通过HTML后台生成的输出。AsciiDoc produces complementary output when generating PDF, EPUB, and DocBook.
+
+想要在遗留的AsciiDoc Python处理器上应用大多数只基于__Asciidoctor__的特性，可以使用Asciidoctor提供的 https://github.com/asciidoctor/asciidoctor/blob/master/compat/asciidoc.conf[AsciiDoc配置文件]。
+====
+
+[[paragraphs]]
+== 段落
+
+=== 普通
+
+AsciiDoc中的段落不需要任何特定的标记。
+一个段落只是一行或多行连续的文本。
+
+要开始一个新的段落，至少需要一个空行进行分隔。
+
+=== 换行
+
+Rubies are red, +
+Topazes are blue.
+
+[%hardbreaks]
+Ruby is red.
+Java is black.
+
+=== 文本
+
+一个普通段落。
+ 
+ 以至少一个空格开始的一系列行是一个文本段落。
+ 文本段落是预先格式化的文本。
+ 文本使用固定宽度的字体来展现，并保留端线。
+
+另一个普通段落。
+
+=== 告诫（Admonition）
+
+NOTE: 告诫（admonition）段落吸引读者关注辅助信息。
+它的用途由段落开头的标签决定。
+
+这里包含了其它内建的告诫（admonition类型：
+
+TIP: 小贴士……
+
+IMPORTANT: 不要忘记……
+
+WARNING: 小心……
+
+CAUTION: 确保……
+
+NOTE: 你也可以创建http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/#admon-bl[告诫块（admonition blocks）].
+
+=== lead paragraph
+
+----
+[.lead]
+这部分文本会作为lead paragraph被样式化（例如，更大的字体）。
+----
+
+NOTE: 默认的Asciidoctor样式表会自动地将前言的第一个段落作为lead paragraph样式化。
+
+=== 段落、告诫（Admonition）和文本块的更多示例
+
+参考Asciidoctor User Manual的下列章节来获取更多的信息和示例。
+
+*   http://asciidoctor.org/docs/user-manual/#paragraph[Paragraphs]
+
+*   http://asciidoctor.org/docs/user-manual/#literal-text-and-blocks[Literal Text and Blocks]
+
+*   http://asciidoctor.org/docs/user-manual/#admonition[Admonitions]
+
+== 格式化文本
+
+=== 粗体、斜体和Monospace
+
+_italic phrase_
+
+__i__talic le__tt__ers
+
+*bold phrase*
+
+**b**old le**tt**ers
+
+*_bold italic phrase_*
+
+**__b__**old italic le**__tt__**ers
+
+`monospace phrase` and le``tt``ers
+
+`_monospace italic phrase_` and le``__tt__``ers
+
+`*monospace bold phrase*` and le``**tt**``ers
+
+`*_monospace bold italic phrase_*` and le``**__tt__**``ers
+
+=== 自定义样式
+
+Werewolves are #allergic to cinnamon#.
+
+Do werewolves believe in [small]#small print#?
+
+[big]##O##nce upon an infinite loop.
+
+=== 上标和下标
+
+^super^script phrase
+
+~sub~script phrase
+
+=== 弯引号标记和撇记号
+
+'`single curved quotes`'
+
+"`double curved quotes`"
+
+Olaf's desk was a mess.
+
+All of the werewolves`' desks were a mess.
+
+Olaf had been with the company since the `'60s.
+
+=== 更多文本格式化示例
+
+参考Asciidoctor User Manual的下列章节来获取更多的信息和示例
+
+*   http://asciidoctor.org/docs/user-manual/#bold-and-italic[Bold and Italic Formatting]
+
+*   http://asciidoctor.org/docs/user-manual/#curved[Quotation Marks and Apostrophes]
+
+*   http://asciidoctor.org/docs/user-manual/#subscript-and-superscript[Subscript and Superscript]
+
+*   http://asciidoctor.org/docs/user-manual/#mono[Monospace Formatting]
+
+*   http://asciidoctor.org/docs/user-manual/#custom-styling-with-attributes[Custom Styling with Attributes]
+
+*   http://asciidoctor.org/docs/user-manual/#pass-mac[Passthrough Macros]
+
+== Document Header
+
+IMPORTANT: header是可选的。
+
+CAUTION: The header may not contain blank lines and must be offset from the content by at least one blank line.
+
+=== 只有标题
+
+----
+= My Document's Title
+
+My document provides...
+----
+
+=== 标题和作者行
+
+----
+= My Document's Title
+Doc Writer <doc.writer@asciidoctor.org>
+
+My document provides...
+----
+
+TIP: Asciidoctor允许作者行包含多个作者。使用分号(;)字符来分隔每个作者。
+
+=== 标题、作者行和修订行
+
+----
+= My Document's Title
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2014-01-01
+
+My document provides...
+----
+
+IMPORTANT: 不能只有修订行而没有作者行。
+
+=== 带属性的Document Header
+
+----
+= My Document's Title
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2014-01-01
+:toc:
+:imagesdir: assets/images
+:homepage: http://asciidoctor.org
+
+My document provides...
+----
+
+[[section-titles]]
+== Section Titles (Headings)
+
+=== Article doctype
+
+----
+= Document Title (Level 0)
+
+== Level 1 Section Title
+
+=== Level 2 Section Title
+
+==== Level 3 Section Title
+
+===== Level 4 Section Title
+
+====== Level 5 Section Title
+
+== Another Level 1 Section Title
+----
+
+WARNING: 如果使用article doctype（默认的），你只能有一个level-0的章节（例如，文档标题），且它必须位于document header。
+
+NOTE: The number of equal signs matches the heading level in the HTML output. For example, __Section Level 1__ becomes an ``<h2>`` heading.
+
+=== Book doctype
+
+----
+= Document Title (Level 0)
+
+== Section Level 1
+
+=== Section Level 2
+
+==== Section Level 3
+
+===== Section Level 4
+
+====== Section Level 5
+
+= Section Level 0
+----
+
+=== 显式id
+
+----
+[[primitives-nulls]]
+== Primitive types and null values
+----
+
+=== 章节锚点和链接(仅Asciidoctor适用)
+
+`sectanchors`::
+When this document attribute is set, a section icon anchor appears in front of the section title.
+
+`sectlinks`::
+When this document attribute is set, the section titles become self-links. This enables a reader to bookmark the section.
+
+== 引入文件
+
+=== 文档片段
+
+----
+= Reference Documentation
+Lead Developer
+
+This is documentation for project X.
+
+include::basics.adoc[]
+
+include::installation.adoc[]
+
+include::example.adoc[]
+----
+
+CAUTION: Asciidoctor does not insert blank lines between adjacent include statements to keep the content separated. Be sure to add a blank line in the source document to avoid unexpected results, such as a section title being swallowed.
+
+=== 引入URI的内容
+
+----
+:asciidoctor-source: https://raw.githubusercontent.com/asciidoctor/asciidoctor/master
+
+include::{asciidoctor-source}/README.adoc[]
+----
+
+NOTE: Including content from a URI is potentially dangerous, so it’s disabled if the safe mode is SECURE or greater. Assuming the safe mode is less than SECURE, you must also set the allow-uri-read attribute to permit Asciidoctor to read content from a URI.
+
+== 水平规则和分页
+
+=== 水平规则
+
+'''
+
+=== 分页
+
+<<<
+
+== 列表
+
+=== 无序，基本
+
+* Edgar Allen Poe
+* Sheri S. Tepper
+* Bill Bryson
+
+NOTE: 在列表的前后都需要空行。
+
+TIP: You can force two lists apart with a line comment, as the previous example demonstrates. The text in the comment, (`^`), is optional, but serves as a hint to other authors that this line serves as an “end of list” marker.
+
+=== 无序，最大嵌套
+
+* level 1
+** level 2
+*** level 3
+**** level 4
+***** level 5
+* level 1
+
+TIP: The unordered list marker can be changed using http://asciidoctor.org/docs/user-manual/#custom-markers[block styles].
+
+=== 复选列表
+
+- [*] checked
+- [x] also checked
+- [ ] not checked
+-     normal list item
+
+TIP: Checklists can use http://asciidoctor.org/docs/user-manual/#checklist[font-based icons and be interactive].
+
+=== 有序，基础
+
+. Step 1
+. Step 2
+. Step 3
+
+=== 有序，嵌套
+
+. level 1
+.. level 2
+... level 3
+.... level 4
+..... level 5
+. level 1
+
+=== 有序，最大嵌套
+
+. level 1
+.. level 2
+... level 3
+.... level 4
+..... level 5
+. level 1
+
+For ordered lists, Asciidoctor supports http://asciidoctor.org/docs/user-manual/#numbering-styles[numeration styles] such as ``lowergreek``and ``decimal-leading-zero``.
+
+=== 带标签的单行
+
+first term:: definition of first term
+section term:: definition of second term
+
+=== 带标签的多行
+
+first term::
+definition of first term
+section term::
+definition of second term
+
+=== Q&A
+
+[qanda]
+What is Asciidoctor?::
+  An implementation of the AsciiDoc processor in Ruby.
+What is the answer to the Ultimate Question?:: 42
+
+=== 混用
+
+Operating Systems::
+  Linux:::
+    . Fedora
+      * Desktop
+    . Ubuntu
+      * Desktop
+      * Server
+  BSD:::
+    . FreeBSD
+    . NetBSD
+
+Cloud Providers::
+  PaaS:::
+    . OpenShift
+    . CloudBees
+  IaaS:::
+    . Amazon EC2
+    . Rackspace
+    
+TIP: Lists can be indented. Leading whitespace is not significant.列表可以缩进。首部空白符是没有意义的。
+
+=== 大纲列表中的复杂内容
+
+* Every list item has at least one paragraph of content,
+  which may be wrapped, even using a hanging indent.
++
+Additional paragraphs or blocks are adjoined by putting
+a list continuation on a line adjacent to both blocks.
++
+list continuation:: a plus sign (`{plus}`) on a line by itself
+
+* A literal paragraph does not require a list continuation.
+
+ $ gem install asciidoctor
+
+* AsciiDoc lists may contain any complex content.
++
+[cols="2", options="header"]
+|===
+|Application
+|Language
+
+|AsciiDoc
+|Python
+
+|Asciidoctor
+|Ruby
+|===
+
+== 链接
+
+=== 外部
+
+http://asciidoctor.org - automatic!
+
+http://asciidoctor.org[Asciidoctor]
+
+https://github.com/asciidoctor[Asciidoctor @ *GitHub*]
+
+=== 带空格和特殊字符
+
+link:++http://example.org/?q=[a b]++[URL with special characters]
+
+link:http://example.org/?q=%5Ba%20b%5D[URL with special characters]
+
+=== Windows路径
+
+link:\\server\share\whitepaper.pdf[Whitepaper]
+
+=== 相对
+
+link:index.html[Docs]
+
+=== Email and IRC
+
+devel@discuss.arquillian.org
+
+mailto:devel@discuss.arquillian.org[Discuss Arquillian]
+
+mailto:devel-join@discuss.arquillian.org[Subscribe, Subscribe me, I want to join!]
+
+irc://irc.freenode.org/#asciidoctor
+
+=== 带属性的链接（仅Asciidoctor适用）
+
+----
+http://discuss.asciidoctor.org[Discuss Asciidoctor, role="external", window="_blank"]
+
+http://discuss.asciidoctor.org[Discuss Asciidoctor^]
+
+http://example.org["Google, Yahoo, Bing^", role="teal"]
+----
+
+NOTE: Links with attributes (including the subject and body segments on mailto links) are a feature unique to Asciidoctor. To enable them, you must set the``linkattrs`` attribute on the document. When they are enabled, you must quote the link text if it contains a comma.
+
+=== 内联锚点
+
+[[bookmark-a]]Inline anchors make arbitrary content referenceable.
+
+anchor:bookmark-b[]Use a cross reference to link to this location.
+
+[[bookmark-c,last paragraph]]The xreflabel attribute will be used as link text in the cross-reference link.
+
+=== 内部交叉引用
+
+参考<<paragraphs>>来学习如何编写段落。
+
+在<<section-titles,章节>>中学习如何组织文档。
+
+=== 文档内部交叉引用(仅Asciidoctor适用)
+
+----
+Refer to <<document-b.adoc#section-b,Section B>> for more information.
+
+See you when you get back from <<document-b#section-b,Section B>>!
+----
+
+[[imagse]]
+== 图片
+
+=== 块
+
+image::sunset.jpg[]
+
+image::sunset.jpg[Sunset]
+
+[[img-sunset]]
+image::sunset.jpg[caption="Figure 1: ", title="A mountain sunset", alt="Sunset", width="300", height="200", link="http://www.flickr.com/photos/javh/5448336655"]
+
+image::http://asciidoctor.org/images/octocat.jpg[GitHub mascot]
+
+IMPORTANT: Images are resolved relative to the value of the http://asciidoctor.org/docs/user-manual/#set-the-images-directory[imagesdir document attribute], which defaults to an empty value.``imagesdir``属性可以是一个绝对路径、相对路径或基础URL。如果目标图片是一个URL或绝对路径，不会添加imagesdir前缀。
+
+TIP: 在所有的图片宏中，你应该使用``imagesdir``属性来避免对图片的共享路径进行硬编码。
+
+=== 使用定位角色的图片宏
+
+image:sunset.jpg[Sunset,150,150,role="right"] What a beautiful sunset!
+
+TIP: 还有大量可用的属性，参考 http://asciidoctor.org/docs/user-manual/#put-images-in-their-place[position and frame images].
+
+=== 内联
+
+Click image:icons/play.png[Play, title="Play"] to get the party started.
+
+Click image:icons/pause.png[title="Pause"] when you need a break.
+
+=== 内嵌
+
+----
+= Document Title
+:data-uri:
+----
+
+NOTE: When the ``data-uri`` attribute is set, all images in the document--​including admonition icons--​are embedded into the document as https://developer.mozilla.org/en-US/docs/data_URIs[data URIs].
+
+TIP: Instead of declaring the ``data-uri`` attribute in the document, you can pass it as a command-line argument using ``-a data-uri``.
+
+== 视频
+
+=== 块
+
+----
+video::video_file.mp4[]
+
+video::video_file.mp4[width=640, start=60, end=140, options=autoplay]
+----
+
+=== 内嵌Youtube视频
+
+----
+video::rPQoq7ThGAU[youtube]
+----
+
+=== 内嵌Vimeo视频
+
+----
+video::67480300[vimeo]
+----
+
+== 源代码
+
+=== 内联
+
+Reference code like `types` or `methods` inline.
+
+=== 文本行
+
+ Indent the line one space to insert a code snippet
+
+=== 文本块
+
+....
+error: The requested operation returned error: 1954 Forbidden search for defensive operations manual
+absolutely fatal: operation initiation lost in the dodecahedron of doom
+would you like to die again? y/n
+....
+
+=== 列出带标题的块，无语法高亮
+
+.Gemfile.lock
+----
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asciidoctor (0.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  asciidoctor (~> 0.1.4)
+----
+
+=== 带标题和语法高亮的代码块
+
+[[app-listing]]
+[source,ruby]
+.app.rb
+----
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+
+=== 带编号的代码块
+
+[source,ruby]
+----
+require 'sinatra' // <1>
+
+get '/hi' do // <2>
+  "Hello World!" // <3>
+end
+----
+<1> Library import
+<2> URL mapping
+<3> Content for response
+
+=== Code block with non-selectable callouts
+
+----
+line of code  // <1>
+line of code  # <2>
+line of code  ;; <3>
+----
+<1> A callout behind a line comment for C-style languages.
+<2> A callout behind a line comment for Ruby, Python, Perl, etc.
+<3> A callout behind a line comment for Clojure.
+
+=== XML code block with a non-selectable callout
+
+[source,xml]
+----
+
+  <title>Section Title</title> <!--1-->
+
+----
+<1> The section title is required.
+
+=== 源自文件的代码块
+
+[source,ruby]
+----
+include::app.rb[]
+----
+
+=== 源自相对源文件目录的文件的代码块
+
+:sourcedir: src/main/java
+
+[source,java]
+----
+include::{sourcedir}/org/asciidoctor/Asciidoctor.java[]
+----
+
+=== Strip leading indentation from source
+
+[source,ruby,indent=0]
+----
+include::lib/document.rb[lines=5..10]
+----
+
+[NOTE]
+====
+*   When ``indent`` is 0, the leading block indent is stripped (tabs are replaced with 4 spaces).
+*   When ``indent`` is > 0, the leading block indent is first stripped (tabs are replaced with 4 spaces), then a block is indented by the number of columns equal to this value.
+====
+
+=== Code block without delimiters (no blank lines)
+
+[source,xml]
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+This is normal content.
+
+[IMPORTANT]
+====
+Enabling the syntax highlighter
+Syntax highlighting is enabled by setting the ``source-highlighter`` attribute in the document header or passed as an argument.
+
+----
+:source-highlighter: pygments
+----
+
+The valid options are ``coderay``, ``highlightjs``, ``prettify``, and ``pygments``.
+====
+
+== 更多分隔块
+
+=== 侧边栏
+
+.AsciiDoc history
+****
+AsciiDoc was first released in Nov 2002 by Stuart Rackham.
+It was designed from the start to be a shorthand syntax
+for producing professional documents like DocBook and LaTeX.
+****
+
+NOTE: 所有块都可以有一个位于它上方的标题。块的标题是一个以点开始的文本行。点后面不能跟着空格。
+
+=== 示例
+
+.Sample document
+====
+Here's a sample AsciiDoc document:
+
+[listing]
+....
+= Title of Document
+Doc Writer
+:toc:
+
+This guide provides...
+....
+
+The document header is useful, but not required.
+====
+
+=== 告诫（Admonition）
+
+[NOTE]
+====
+一个告诫（admonition）块可以包含复杂的内容。
+
+.A list
+- one
+- two
+- three
+
+另一个段落。
+====
+
+[TIP]
+====
+告诫和编号图标
+
+Asciidoctor可以使用 http://fortawesome.github.io/Font-Awesome/[Font Awesome]和CSS来“绘制”图标。
+
+To use this feature, set the value of the ``icons`` document attribute to ``font``. Asciidoctor will then emit HTML markup that selects an appropriate font character from the Font Awesome font for each admonition block.
+
+
+Icons can also be used http://asciidoctor.org/docs/user-manual/#inline-icons[inline] and http://asciidoctor.org/docs/user-manual/#size-rotate-and-flip[styled].
+====
+
+=== 块引用
+
+[quote, Abraham Lincoln, Address delivered at the dedication of the Cemetery at Gettysburg]
+____
+Four score and seven years ago our fathers brought forth
+on this continent a new nation...
+____
+
+[quote, Albert Einstein]
+A person who never made a mistake never tried anything new.
+
+____
+A person who never made a mistake never tried anything new.
+____
+
+[quote, Charles Lutwidge Dodgson, 'Mathematician and author, also known as http://en.wikipedia.org/wiki/Lewis_Carroll[Lewis Carroll]']
+____
+If you don't know where you are going, any road will get you there.
+____
+
+=== 简写的块引用（仅Asciidoctor适用）
+
+"I hold it that a little rebellion now and then is a good thing,
+and as necessary in the political world as storms in the physical."
+-- Thomas Jefferson, Papers of Thomas Jefferson: Volume 11
+
+=== Air quotes: the best thing since fenced code blocks (仅Asciidoctor适用)
+
+[, Richard M. Nixon]
+""
+When the President does it, that means that it's not illegal.
+""
+
+=== Passthrough
+
+++++
+<p>
+Content in a passthrough block is passed to the output unprocessed.
+That means you can include raw HTML, like this embedded Gist:
+</p>
+
+<script src="http://gist.github.com/mojavelinux/5333524.js">
+</script>
+++++
+
+=== Open
+
+--
+An open block can be an anonymous container,
+or it can masquerade as any other block.
+--
+
+[source]
+--
+puts "I'm a source block!"
+--
+
+=== 自定义替换
+
+:version: 0.1.4
+
+[source,xml,subs="verbatim,attributes"]
+----
+<dependency>
+  <groupId>org.asciidoctor</groupId>
+  <artifactId>asciidoctor-java-integration</artifactId>
+  <version>{version}</version>
+</dependency>
+----
+
+== 块的ID、角色和选项
+
+=== 分配块的ID和角色的传统标记方法
+
+----
+[[goals]]
+[role="incremental"]
+* Goal 1
+* Goal 2
+----
+
+=== 分配块的ID和角色的简写标记方法（仅Asciidoctor适用）
+
+----
+[#goals.incremental]
+* Goal 1
+* Goal 2
+----
+
+[TIP]
+====
+*   使用简写语法来指定多个角色，需要用点来分隔它们。
+
+*   在简写语法中``id``和``role``值的顺序没有关系。
+====
+
+=== Traditional markup method for assigning quoted text anchor (id) and role
+
+----
+[[free_the_world]][big goal]_free the world_
+----
+
+=== Shorthand markup method for assigning quoted text anchor (id) and role (Asciidoctor only)
+
+----
+[#free_the_world.big.goal]_free the world_
+----
+
+=== Role assigned to text enclosed in backticks
+
+----
+[rolename]`monospace text`
+----
+
+=== Traditional markup method for assigning block options
+
+----
+[options="header,footer,autowidth"]
+|===
+|Cell A |Cell B
+|===
+----
+
+=== Shorthand markup method for assigning block options (Asciidoctor only)
+
+----
+[%header%footer%autowidth]
+|===
+|Cell A |Cell B
+|===
+----
+
+== 注释
+
+=== 行
+
+----
+// 单行注释
+----
+
+TIP: 单行注释可以用来分隔元素，例如两个相邻的列表。
+
+=== 块
+
+----
+////
+多行注释。
+
+注意这是一个分隔的块。
+////
+----
+
+== 表格
+
+=== 具有标题、三列、列头和两行内容的表格
+
+----
+.Table Title
+|===
+|Name of Column 1 |Name of Column 2 |Name of Column 3// <1>
+
+// <2>
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+|Cell in column 3, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|Cell in column 3, row 2
+|===
+----
+<1> Unless the ``cols`` attribute is specified, the number of columns is equal to the number of vertical bars on the first non-blank line inside the block delimiters.
+<2> When a blank line follows a single line of column titles, the column titles row will be styled as a header row by default.
+
+=== 具有两列、列头和两行内容的表格
+
+----
+[cols="2*", options="header"] // <1>
+|===
+|Name of Column 1
+|Name of Column 2
+
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+----
+<1> The * in the cols attribute is the repeat operator. It means repeat the column specification for the remainder of columns. In this case, it means to repeat the default formatting across 4 columns. When the header row is not defined on a single line, you must use the cols attribute to set the number of columns and options attributes to make the first row a header.
+
+=== 具有三列、列头和两行内容的表格
+
+----
+[cols="1,1,2", options="header"] // <1>
+.Applications
+|===
+|Name
+|Category
+|Description
+
+|Firefox
+|Browser
+|Mozilla Firefox is an open-source web browser.
+It's designed for standards compliance,
+performance, portability.
+
+|Arquillian
+|Testing
+|An innovative and highly extensible testing platform.
+Empowers developers to easily create real, automated tests.
+|===
+----
+<1> 在这个例子中，cols属性有两个功能。它指出表格有三列，并且设置了列之间的相对宽度。
+
+=== 列中包含AsciiDoc内容的表格
+
+[cols="2,2,5a"]
+|===
+|Firefox
+|Browser
+|Mozilla Firefox is an open-source web browser.
+
+It's designed for:
+
+* standards compliance
+* performance
+* portability
+
+http://getfirefox.com[Get Firefox]!
+|===
+
+=== 源自CSV数据的表格
+
+[format="csv", options="header"]
+|===
+Artist,Track,Genre
+Baauer,Harlem Shake,Hip Hop
+The Lumineers,Ho Hey,Folk Rock
+|===
+
+=== Table from CSV data using shorthand (Asciidoctor only)
+
+,===
+Artist,Track,Genre
+
+Baauer,Harlem Shake,Hip Hop
+,===
+
+=== Table from CSV data in file
+
+----
+|===
+include::customers.csv[]
+|===
+----
+
+=== Table from DSV data using shorthand (Asciidoctor only)
+
+:===
+Artist:Track:Genre
+
+Robyn:Indestructable:Dance
+:===
+
+=== Table with formatted, aligned and merged cells
+
+[cols="e,m,^,>s", width="25%"]
+|===
+|1 >s|2 |3 |4
+^|5 2.2+^.^|6 .3+<.>m|7
+^|8
+|9 2+>|10
+|===
+
+== UI Macros
+
+== Attributes and Substitutions
+
+== 文本替换
+
+== 转义文本
+
+== Table of Contents (ToC)
+
+=== Document with ToC
+
+----
+= AsciiDoc Writer's Guide
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2013-08-01
+:toc:
+----
+
+=== Document with ToC positioned on the right
+
+----
+= AsciiDoc Writer's Guide
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2014-08-01
+:toc: right
+----
+
+TIP: The ToC http://asciidoctor.org/docs/user-manual/#user-toc[title, levels, and positioning] can be customized.
+
+== Bibliography
+
+== Footnotes
+
+== Markdown兼容
+
+只有使用Asciidoctor才能兼容Markdown语法。
+
+=== Markdown风格的标题
+
+----
+# Document Title (Level 0)
+
+## Section Level 1
+
+### Section Level 2
+
+#### Section Level 3
+
+##### Section Level 4
+
+###### Section Level 5
+----
+
+=== Fenced code block with syntax highlighting
+
+----
+```ruby
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+
+=== Markdown-style blockquote
+
+> I hold it that a little rebellion now and then is a good thing,
+> and as necessary in the political world as storms in the physical.
+> -- Thomas Jefferson, Papers of Thomas Jefferson: Volume 11
+
+=== Markdown-style blockquote with block content
+
+> > What's new?
+>
+> I've got Markdown in my AsciiDoc!
+>
+> > Like what?
+>
+> * Blockquotes
+> * Headings
+> * Fenced code blocks
+>
+> > Is there more?
+>
+> Yep. AsciiDoc and Markdown share a lot of common syntax already.
+
+=== Markdown-style horizontal rules
+
+---
+
+- - -
+
+***
+
+* * *
+
+== 用户手册和帮助
+
+To learn more about Asciidoctor and its capabilities, check out the other http://asciidoctor.org/docs[Asciidoctor guides] and its http://asciidoctor.org/docs/user-manual[User Manual]. Also, don’t forget to join the http://discuss.asciidoctor.org/[Asciidoctor mailing list], where you can ask questions and leave comments.
